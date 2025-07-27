@@ -1,0 +1,80 @@
+/* Custom color palette and font */
+:root {
+  --primary-color: #6c63ff;
+  --secondary-color: #ff6584;
+  --background-light: #f0f2f5;
+  --background-dark: #181a20;
+  --text-light: #181a20;
+  --text-dark: #f0f2f5;
+  --panel-bg-light: #fff;
+  --panel-bg-dark: #232946;
+  --panel-border-light: #bdbdbd;
+  --panel-border-dark: #393e4f;
+  --panel-hover-light: #f5f7fa;
+  --panel-hover-dark: #232946;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body[data-theme='light'] {
+  background: var(--background-light) !important;
+  color: var(--text-light) !important;
+}
+body[data-theme='dark'] {
+  background: var(--background-dark) !important;
+  color: var(--text-dark) !important;
+}
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  transition: background var(--transition), color var(--transition);
+}
+
+html, body, #root {
+  height: 100%;
+  background: unset !important;
+}
+
+/* Panel styles for clarity */
+.panel {
+  background: var(--panel-bg-light);
+  color: var(--text-light);
+  border: 1.5px solid var(--panel-border-light);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(108,99,255,0.06);
+  padding: 16px;
+  transition: background var(--transition), color var(--transition), border var(--transition);
+}
+body[data-theme='dark'] .panel {
+  background: var(--panel-bg-dark);
+  color: var(--text-dark);
+  border: 1.5px solid var(--panel-border-dark);
+}
+.panel:hover {
+  background: var(--panel-hover-light);
+}
+body[data-theme='dark'] .panel:hover {
+  background: var(--panel-hover-dark);
+}
+
+/* Typography for clarity */
+h1, h2, h3, h4, h5, h6, .MuiTypography-root {
+  color: inherit !important;
+}
+
+/* Button contrast */
+button, .MuiButton-root {
+  color: var(--primary-color) !important;
+  background: #fff !important;
+  border-radius: 8px !important;
+  border: 1.5px solid var(--primary-color) !important;
+  font-weight: 600;
+  transition: background var(--transition), color var(--transition), border var(--transition);
+}
+body[data-theme='dark'] button, body[data-theme='dark'] .MuiButton-root {
+  color: #fff !important;
+  background: var(--primary-color) !important;
+  border: 1.5px solid #fff !important;
+}
+button:hover, .MuiButton-root:hover {
+  background: var(--secondary-color) !important;
+  color: #fff !important;
+} 
