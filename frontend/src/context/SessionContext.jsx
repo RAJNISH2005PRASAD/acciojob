@@ -14,10 +14,12 @@ export const SessionProvider = ({ children }) => {
     if (token) fetchSessions();
   }, [token]);
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
   const fetchSessions = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('/sessions', {
+      const res = await axios.get(`${API_BASE_URL}/sessions`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSessions(res.data);
@@ -30,7 +32,7 @@ export const SessionProvider = ({ children }) => {
   const createSession = async (sessionName) => {
     setLoading(true);
     try {
-      const res = await axios.post('/sessions', { sessionName }, {
+      const res = await axios.post(`${API_BASE_URL}/sessions`, { sessionName }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSessions([...sessions, res.data]);
@@ -46,7 +48,7 @@ export const SessionProvider = ({ children }) => {
   const selectSession = async (id) => {
     setLoading(true);
     try {
-      const res = await axios.get(`/sessions/${id}`, {
+      const res = await axios.get(`${API_BASE_URL}/sessions/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCurrentSession(res.data);
@@ -58,7 +60,7 @@ export const SessionProvider = ({ children }) => {
 
   const updateSession = async (id, data) => {
     try {
-      const res = await axios.put(`/sessions/${id}`, data, {
+      const res = await axios.put(`${API_BASE_URL}/sessions/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCurrentSession(res.data);
@@ -68,7 +70,7 @@ export const SessionProvider = ({ children }) => {
 
   const deleteSession = async (id) => {
     try {
-      await axios.delete(`/sessions/${id}`, {
+      await axios.delete(`${API_BASE_URL}/sessions/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSessions(sessions.filter(s => s._id !== id));

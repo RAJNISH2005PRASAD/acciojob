@@ -25,7 +25,8 @@ const ExportButtons = () => {
 
   const handleDownload = async () => {
     try {
-      const res = await axios.post('/ai/export', { jsx, css }, {
+      const API_BASE_URL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(`${API_BASE_URL}/ai/export`, { jsx, css }, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob'
       });

@@ -34,7 +34,8 @@ const ChatPanel = () => {
       { role: 'user', content: input, timestamp: new Date() }
     ];
     try {
-      const res = await axios.post('/ai/generate', {
+      const API_BASE_URL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(`${API_BASE_URL}/ai/generate`, {
         prompt: input,
         code: currentSession.code,
         chatHistory: newChat.map(({ role, content }) => ({ role, content }))
@@ -67,7 +68,8 @@ const ChatPanel = () => {
     setSuggestionLoading(true);
     setError('');
     try {
-      const res = await axios.post('/ai/suggest', {
+      const API_BASE_URL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(`${API_BASE_URL}/ai/suggest`, {
         code: currentSession.code,
         chatHistory: (currentSession.chatHistory || []).map(({ role, content }) => ({ role, content }))
       }, {
